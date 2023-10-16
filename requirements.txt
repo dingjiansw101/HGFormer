@@ -1,0 +1,14 @@
+cython
+scipy
+numpy==1.23.1
+setuptools==58.0.4
+shapely
+timm
+h5py
+submitit
+scikit-image
+ftfy
+einops
+regex
+mmcv
+imagecorruptions

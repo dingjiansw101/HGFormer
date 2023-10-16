@@ -1,0 +1,27 @@
+_BASE_: ../cityscapes/maskformer2_R50_bs16_20k_gn.yaml
+MODEL:
+  BACKBONE:
+    NAME: "D2SwinTransformer"
+  SWIN:
+    EMBED_DIM: 96
+    DEPTHS: [2, 2, 6, 2]
+    NUM_HEADS: [3, 6, 12, 24]
+    WINDOW_SIZE: 7
+    APE: False
+    DROP_PATH_RATE: 0.3
+    PATCH_NORM: True
+  WEIGHTS: "swin_tiny_patch4_window7_224.pkl"
+  PIXEL_MEAN: [123.675, 116.280, 103.530]
+  PIXEL_STD: [58.395, 57.120, 57.375]
+
+DATALOADER:
+  FILTER_EMPTY_ANNOTATIONS: True
+  NUM_WORKERS: 4
+VERSION: 2
+SOLVER:
+  MAX_ITER: 20000
+
+CUDNN_BENCHMARK: True
+DATASETS:
+  TRAIN: ("cityscapes_fine_sem_seg_train", )
+  TEST:  ("cityscapes_fine_sem_seg_val", "cityscapes_fine_gaussian_noise_5_val",  "cityscapes_fine_shot_noise_5_val", "cityscapes_fine_impulse_noise_5_val", "cityscapes_fine_defocus_blur_5_val", "cityscapes_fine_glass_blur_5_val", "cityscapes_fine_motion_blur_5_val", "cityscapes_fine_zoom_blur_5_val", "cityscapes_fine_snow_5_val", "cityscapes_fine_frost_5_val", "cityscapes_fine_fog_5_val", "cityscapes_fine_brightness_5_val", "cityscapes_fine_contrast_5_val", "cityscapes_fine_elastic_transform_5_val", "cityscapes_fine_pixelate_5_val", "cityscapes_fine_jpeg_compression_5_val", "cityscapes_fine_speckle_noise_5_val", "cityscapes_fine_gaussian_blur_5_val", "cityscapes_fine_spatter_5_val", "cityscapes_fine_saturate_5_val")

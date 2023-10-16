@@ -1,0 +1,25 @@
+_BASE_: hgformer_R50_bs16_20k.yaml
+MODEL:
+  BACKBONE:
+    NAME: "D2SwinTransformer"
+  SWIN:
+    EMBED_DIM: 96
+    DEPTHS: [2, 2, 6, 2]
+    NUM_HEADS: [3, 6, 12, 24]
+    WINDOW_SIZE: 7
+    APE: False
+    DROP_PATH_RATE: 0.3
+    PATCH_NORM: True
+  WEIGHTS: "swin_tiny_patch4_window7_224.pkl"
+  PIXEL_MEAN: [123.675, 116.280, 103.530]
+  PIXEL_STD: [58.395, 57.120, 57.375]
+#DATASETS:
+#  TRAIN: ("cityscapes_fine_sem_seg_train",)
+#  TEST: ("synthia_val", "cityscapes_fine_sem_seg_val", "bdd_val", "mapillary_val", "gta_trainid_val")
+SOLVER:
+  MAX_ITER: 20000
+  IMS_PER_BATCH: 16
+
+TEST:
+  CLUSTER_SOFTMAX: True
+  PRED_STAGE: "spix_pixelexclude0125+stage3"
