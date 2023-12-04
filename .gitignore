@@ -46,7 +46,7 @@ _darcs
 
 # project dirs
 /detectron2/model_zoo/configs
-/datasets/*
+# /datasets/*
 !/datasets/*.*
 /projects/*/datasets
 /models
